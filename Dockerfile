@@ -7,8 +7,8 @@ RUN cd /tmp/ && \
   tar zxf live555-latest.tar.gz && rm live555-latest.tar.gz
 
 # Apply OutPacketBuffer::maxSize patch
-COPY live555ProxyServer.patch /tmp
-RUN patch /tmp/live/proxyServer/live555ProxyServer.cpp < /tmp/live555ProxyServer.patch
+COPY live555MediaServer.patch /tmp
+RUN patch /tmp/live/mediaServer/DynamicRTSPServer.cpp < /tmp/live555MediaServer.patch
 
 # Compile LIVE555 Proxy Server
 RUN cd /tmp/live && \
@@ -17,9 +17,9 @@ RUN cd /tmp/live && \
 
 FROM alpine
 RUN apk add --update --no-cache gcc
-COPY --from=builder /usr/local/bin/live555ProxyServer /usr/local/bin/
+COPY --from=builder /usr/local/bin/live555MediaServer /usr/local/bin/
 
 EXPOSE 554
 EXPOSE 8554
 
-ENTRYPOINT ["live555ProxyServer"]
+ENTRYPOINT ["live555MediaServer"]
