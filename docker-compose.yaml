@@ -8,5 +8,5 @@ services:
       - 554:554
       - 8554:8554
     restart: unless-stopped
-  volumes:
-    - ./live555:/data
+    volumes:
+      - /live555:/data

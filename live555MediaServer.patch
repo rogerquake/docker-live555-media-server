@@ -1,6 +1,6 @@
 --- DynamicRTSPServer.cpp       2023-01-19 10:01:59.000000000 -0500
-+++ DynamicRTSPServer2.cpp      2023-02-18 16:39:06.774800600 -0500
-@@ -145,12 +145,12 @@
++++ DynamicRTSPServer2.cpp      2023-02-18 23:40:39.122814200 -0500
+@@ -145,7 +145,7 @@
    } else if (strcmp(extension, ".264") == 0) {
      // Assumed to be a H.264 Video Elementary Stream file:
      NEW_SMS("H.264 Video");
@@ -9,9 +9,12 @@
      sms->addSubsession(H264VideoFileServerMediaSubsession::createNew(env, fileName, reuseSource));
    } else if (strcmp(extension, ".265") == 0) {
      // Assumed to be a H.265 Video Elementary Stream file:
-     NEW_SMS("H.265 Video");
--    OutPacketBuffer::maxSize = 100000; // allow for some possibly large H.265 frames
-+    OutPacketBuffer::maxSize = 8000000; // allow for some possibly large H.265 frames
-     sms->addSubsession(H265VideoFileServerMediaSubsession::createNew(env, fileName, reuseSource));
-   } else if (strcmp(extension, ".mp3") == 0) {
-     // Assumed to be a MPEG-1 or 2 Audio file:
+@@ -212,7 +212,7 @@
+     sms->addSubsession(DVVideoFileServerMediaSubsession::createNew(env, fileName, reuseSource));
+   } else if (strcmp(extension, ".mkv") == 0 || strcmp(extension, ".webm") == 0) {
+     // Assumed to be a Matroska file (note that WebM ('.webm') files are also Matroska files)
+-    OutPacketBuffer::maxSize = 300000; // allow for some possibly large VP8 or VP9 frames
++    OutPacketBuffer::maxSize = 800000; // allow for some possibly large VP8 or VP9 frames
+     NEW_SMS("Matroska video+audio+(optional)subtitles");
+
+     // Create a Matroska file server demultiplexor for the specified file.
