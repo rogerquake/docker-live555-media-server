@@ -1,0 +1,12 @@
+version: '2'
+services:
+  live555-proxy-server:
+    image: live555-media-server
+    container_name: live555- media-server
+    network_mode: host
+    ports:
+      - 554:554
+      - 8554:8554
+    restart: unless-stopped
+  volumes:
+    - ./live555:/data

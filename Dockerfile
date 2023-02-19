@@ -19,6 +19,8 @@ FROM alpine
 RUN apk add --update --no-cache gcc
 COPY --from=builder /usr/local/bin/live555MediaServer /usr/local/bin/
 
+WORKDIR /data
+
 EXPOSE 554
 EXPOSE 8554
 
